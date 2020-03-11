@@ -91,15 +91,19 @@ public class App {
             final var tmpFile = Path.of(TEMP_FILE);
             saveCurrentResult(cases, tmpFile);
             final var newCases = CollectionUtils.subtract(cases, casesOld);
-            final var message = "Nowy przypadek wykryty, całkowita ilość przypadków " + currentCases +
-                    " Nowe przypadki:" + newCases.stream().map(Object::toString).collect(Collectors.joining(", "));
+            final var message =
+                    String.format("Nowy przypadek wykryty, całkowita ilość przypadków %s Nowe przypadki (+%i): %s",
+                            currentCases,
+                            currentCases - oldCases,
+                            newCases.stream().map(c -> "Powiat/Miasto: " + c.getCounty()).
+                                    collect(Collectors.joining(", ")));
             log.info(message);
             reportServices(message);
         }
     }
 
     private static void reportServices(String message) {
-    //        TODO wykop or other sites
+        //        TODO wykop or other sites
     }
 
     private static int countCasesNumber(List<CoronaCase> cases) {

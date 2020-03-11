@@ -93,7 +93,7 @@ public class App {
             saveCurrentResult(cases, tmpFile);
             final var newCases = CollectionUtils.subtract(cases, casesOld);
             final var message =
-                    String.format("Nowy przypadek wykryty, całkowita ilość przypadków %s Nowe przypadki (+%i): %s",
+                    String.format("Nowy przypadek wykryty, całkowita ilość przypadków %s Nowe przypadki (+%d): %s",
                             currentCases,
                             currentCases - oldCases,
                             newCases.stream().map(c -> "Powiat/Miasto: " + c.getCounty()).

@@ -24,6 +24,7 @@ public class App {
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36";
     private static final String CORONAVIRUS_DATA_ID = "registerData";
     private static final String TEMP_FILE = "corona_temp.json";
+    private static final PushProvider push = new PushProvider();
 
     public static void main(String[] args) {
         var loopNr = 1;
@@ -103,7 +104,7 @@ public class App {
     }
 
     private static void reportServices(String message) {
-        //        TODO wykop or other sites
+        push.send(message);
     }
 
     private static int countCasesNumber(List<CoronaCase> cases) {

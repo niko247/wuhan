@@ -29,7 +29,7 @@ public class App {
         var loopNr = 1;
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                log.info("Fetching data in loop:" + loopNr++);
+                System.out.println("Fetching data in loop:" + loopNr++);
                 final List<CoronaCase> cases = fetchCases();
                 generateReport(cases);
                 Thread.sleep(TimeUnit.MINUTES.toMillis(REFRESH_MINUTES));
@@ -85,7 +85,7 @@ public class App {
 
     private static void compareAndSaveIfChanged(List<CoronaCase> cases, List<CoronaCase> casesOld) throws IOException {
         final var currentCases = countCasesNumber(cases);
-        log.info("Wszystkie obecne przypadki:" + currentCases);
+        System.out.println("Wszystkie obecne przypadki:" + currentCases);
         final var oldCases = countCasesNumber(casesOld);
         if (currentCases != oldCases) {
             final var tmpFile = Path.of(TEMP_FILE);
@@ -97,7 +97,7 @@ public class App {
                             currentCases - oldCases,
                             newCases.stream().map(c -> "Powiat/Miasto: " + c.getCounty()).
                                     collect(Collectors.joining(", ")));
-            log.info(message);
+            System.out.println(message);
             reportServices(message);
         }
     }

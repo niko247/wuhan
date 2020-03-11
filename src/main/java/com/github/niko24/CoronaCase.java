@@ -7,9 +7,9 @@ import lombok.Data;
 public class CoronaCase {
     @SerializedName("Województwo")
     private String voivodeship;
-    @SerializedName("Powiat")
+    @SerializedName("Powiat/Miasto")
     private String county;
-    @SerializedName("Liczba przypadków")
+    @SerializedName("Liczba")
     private int casesNumber;
 
     @Override

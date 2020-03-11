@@ -60,27 +60,46 @@ public class App {
     }
 
     private static void generateReport(List<CoronaCase> cases) throws IOException {
-        final var tmpFile = Path.of(TEMP_FILE);
-        if (!Files.exists(tmpFile)) {
-            final var jsonContent = new Gson().toJson(cases);
-            Files.writeString(tmpFile, jsonContent);
-        }
-        Type listType = new TypeToken<ArrayList<CoronaCase>>() {
-        }.getType();
-        final var jsonContent = Files.readString(tmpFile);
-        final List<CoronaCase> casesOld = new Gson().fromJson(jsonContent, listType);
-        compare(cases, casesOld);
+        var casesOld = getOldCases(cases);
+        compareAndSaveIfChanged(cases, casesOld);
     }
 
-    private static void compare(List<CoronaCase> cases, List<CoronaCase> casesOld) {
+    private static List<CoronaCase> getOldCases(List<CoronaCase> cases) throws IOException {
+        final var tmpFile = Path.of(TEMP_FILE);
+        List<CoronaCase> casesOld;
+        if (Files.exists(tmpFile)) {
+            Type listType = new TypeToken<ArrayList<CoronaCase>>() {
+            }.getType();
+            final var jsonContent = Files.readString(tmpFile);
+            casesOld = new Gson().fromJson(jsonContent, listType);
+        } else {
+            casesOld = cases;
+        }
+        return casesOld;
+    }
+
+    private static void saveCurrentResult(List<CoronaCase> cases, Path tmpFile) throws IOException {
+        final var jsonContent = new Gson().toJson(cases);
+        Files.writeString(tmpFile, jsonContent);
+    }
+
+    private static void compareAndSaveIfChanged(List<CoronaCase> cases, List<CoronaCase> casesOld) throws IOException {
         final var currentCases = countCasesNumber(cases);
         log.info("Wszystkie obecne przypadki:" + currentCases);
         final var oldCases = countCasesNumber(casesOld);
         if (currentCases != oldCases) {
+            final var tmpFile = Path.of(TEMP_FILE);
+            saveCurrentResult(cases, tmpFile);
             final var newCases = CollectionUtils.subtract(cases, casesOld);
-            log.info("Nowy przypadek wykryty, całkowita ilość przypadków " + oldCases +
-                    " Nowe przypadki:" + newCases.stream().map(Object::toString).collect(Collectors.joining(", ")));
+            final var message = "Nowy przypadek wykryty, całkowita ilość przypadków " + currentCases +
+                    " Nowe przypadki:" + newCases.stream().map(Object::toString).collect(Collectors.joining(", "));
+            log.info(message);
+            reportServices(message);
         }
+    }
+
+    private static void reportServices(String message) {
+    //        TODO wykop or other sites
     }
 
     private static int countCasesNumber(List<CoronaCase> cases) {

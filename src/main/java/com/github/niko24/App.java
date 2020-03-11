@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 public class App {
-    private final static long REFRESH_MINUTES = 10;
+    private final static long REFRESH_MINUTES = 3;
     private final static String URL = "https://www.gov.pl/web/koronawirus/wykaz-zarazen-koronawirusem-sars-cov-2";
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36";
     private static final String CORONAVIRUS_DATA_ID = "registerData";

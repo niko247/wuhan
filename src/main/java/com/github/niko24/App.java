@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Log4j2
 public class App {
-    private final static long REFRESH_MINUTES = 3;
+    private final static long REFRESH_MINUTES = 15;
     private final static String URL = "https://www.gov.pl/web/koronawirus/wykaz-zarazen-koronawirusem-sars-cov-2";
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36";
     private static final String CORONAVIRUS_DATA_ID = "registerData";
@@ -29,7 +29,7 @@ public class App {
         var loopNr = 1;
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                System.out.println("Fetching data in loop:" + loopNr++);
+                log.info("Fetching data in loop:" + loopNr++);
                 final List<CoronaCase> cases = fetchCases();
                 generateReport(cases);
                 Thread.sleep(TimeUnit.MINUTES.toMillis(REFRESH_MINUTES));
@@ -85,7 +85,7 @@ public class App {
 
     private static void compareAndSaveIfChanged(List<CoronaCase> cases, List<CoronaCase> casesOld) throws IOException {
         final var currentCases = countCasesNumber(cases);
-        System.out.println("Wszystkie obecne przypadki:" + currentCases);
+        log.info("Wszystkie obecne przypadki:" + currentCases);
         final var oldCases = countCasesNumber(casesOld);
         if (currentCases != oldCases) {
             final var tmpFile = Path.of(TEMP_FILE);
@@ -97,7 +97,7 @@ public class App {
                             currentCases - oldCases,
                             newCases.stream().map(c -> "Powiat/Miasto: " + c.getCounty()).
                                     collect(Collectors.joining(", ")));
-            System.out.println(message);
+            log.info(message);
             reportServices(message);
         }
     }

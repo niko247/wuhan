@@ -1,1 +1,1 @@
-worker: java -jar target/wuhan-1.0-SNAPSHOT.jar
+worker: java -jar target/wuhan.jar

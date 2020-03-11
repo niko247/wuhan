@@ -1,1 +1,1 @@
-worker: java -jar target/wuhan.jar
+worker: java -cp "target/classes/:target/dependency/*" com.github.niko24.App

@@ -61,39 +61,15 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.github.niko24.App</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
+                        <id>copy-dependencies</id>
                         <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
+                        <goals><goal>copy-dependencies</goal></goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <finalName>wuhan</finalName>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.github.niko24.App</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <appendAssemblyId>false</appendAssemblyId>
-                </configuration>
             </plugin>
         </plugins>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

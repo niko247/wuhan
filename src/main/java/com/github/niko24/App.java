@@ -89,8 +89,6 @@ public class App {
         log.info("Wszystkie obecne przypadki:" + currentCases);
         final var oldCases = countCasesNumber(casesOld);
         if (currentCases != oldCases) {
-            final var tmpFile = Path.of(TEMP_FILE);
-            saveCurrentResult(cases, tmpFile);
             final var newCases = CollectionUtils.subtract(cases, casesOld);
             final var message =
                     String.format("Nowy przypadek wykryty, całkowita ilość przypadków %s Nowe przypadki (+%d): %s",
@@ -101,6 +99,7 @@ public class App {
             log.info(message);
             reportServices(message);
         }
+        saveCurrentResult(cases, Path.of(TEMP_FILE));
     }
 
     private static void reportServices(String message) {

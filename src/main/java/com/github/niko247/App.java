@@ -47,7 +47,7 @@ public class App {
     }
 
     public void fetchPageAndReport() throws IOException {
-        final List<CoronaCase> currentCases = casesFetcher.fetchCases();
+        var currentCases = casesFetcher.fetchCases();
         reportAndSave(currentCases);
 
     }

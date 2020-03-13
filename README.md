@@ -5,8 +5,9 @@ Checks for new cases of coronavirus infections in Poland and send push notificat
 Requires Java>=13
 
 In order to send send push notification via pushed.co given environment variables must be set:
-#####PUSH_APP_KEY
 
-#####PUSH_APP_SECRET
+**PUSH_APP_KEY**
+
+**PUSH_APP_SECRET**
 
 Application can be deployed to Heroku using included Procfile

@@ -1,4 +1,4 @@
-package com.github.niko24;
+package com.github.niko247;
 
 import lombok.Data;
 

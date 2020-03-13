@@ -1,4 +1,4 @@
-package com.github.niko24;
+package com.github.niko247;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -14,6 +14,6 @@ public class CoronaCase {
 
     @Override
     public String toString() {
-        return "Województwo: " + voivodeship + " Powiat: " + county + " Liczba przypadków" + casesNumber;
+        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków" + casesNumber;
     }
 }

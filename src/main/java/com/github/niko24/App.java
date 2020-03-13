@@ -91,10 +91,10 @@ public class App {
         if (currentCases != oldCases) {
             final var newCases = CollectionUtils.subtract(cases, casesOld);
             final var message =
-                    String.format("Nowy przypadek wykryty, całkowita ilość przypadków %s Nowe przypadki (+%d): %s",
+                    String.format("Nowe przypadki, całkowita ilość %s (+%d): Lokacje:%s",
                             currentCases,
                             currentCases - oldCases,
-                            newCases.stream().map(c -> "Powiat/Miasto: " + c.getCounty()).
+                            newCases.stream().map(CoronaCase::getCounty).
                                     collect(Collectors.joining(", ")));
             log.info(message);
             reportServices(message);

@@ -1,7 +1,5 @@
 package com.github.niko247;
 
-import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -21,7 +19,7 @@ public class OldCasesManagerTest {
         var oldCasesManager = new OldCasesManager("not_existing");
         //when
         final var oldCases = oldCasesManager.get();
-
+        //then
         assertThat(oldCases).isEmpty();
 
     }

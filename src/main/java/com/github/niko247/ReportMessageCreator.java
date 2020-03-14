@@ -14,14 +14,13 @@ public class ReportMessageCreator {
         var currentCases = countCasesNumber(cases);
         log.info("Checking if generate report for total cases:" + currentCases);
         var oldCases = countCasesNumber(casesOld);
-        final var newCasesDetected = currentCases != oldCases;
+        var newCasesDetected = currentCases != oldCases;
         if (newCasesDetected) {
             var newCases = CollectionUtils.subtract(cases, casesOld);
             var difference = currentCases - oldCases;
             return Optional.of(
-                    String.format("Całkowita ilość %s (%s%d). Lokacje:%s",
+                    String.format("Całkowita ilość %s (%+d). Lokacje:%s",
                             currentCases,
-                            difference > 0 ? "+" : "",
                             difference,
                             newCases.stream().map(CoronaCase::getCounty).
                                     collect(Collectors.joining(", "))));

@@ -12,7 +12,7 @@ public class PushManagerTest {
     @Test
     public void send() {
         //given
-        final PushManager pushManager = new PushManager();
+        var pushManager = new PushManager();
 
         //when
         var sent = pushManager.send("TEST MESSAGE");

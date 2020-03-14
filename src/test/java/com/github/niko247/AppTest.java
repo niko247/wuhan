@@ -33,7 +33,7 @@ public class AppTest {
         var app = new App(push, casesFetcher, oldCasesManager, reportMessageCreator);
         when(casesFetcher.fetchCases()).thenReturn(currentCases);
         when(oldCasesManager.get()).thenReturn(Optional.of(oldCases));
-        final var report = "REPORT";
+        var report = "REPORT";
         when(reportMessageCreator.createIfNewCases(currentCases, oldCases)).
                 thenReturn(Optional.of(report));
 

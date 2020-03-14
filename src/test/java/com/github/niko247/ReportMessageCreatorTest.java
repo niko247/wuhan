@@ -18,8 +18,8 @@ public class ReportMessageCreatorTest {
         var coronaCase2 = createCase("COUNTY2");
         var coronaCase3 = createCase("COUNTY3");
 
-        final var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
-        final var oldCases = Collections.singletonList(coronaCase);
+        var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
+        var oldCases = Collections.singletonList(coronaCase);
 
         //when
         var result = reportCreator.createIfNewCases(currentCases, oldCases);

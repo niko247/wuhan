@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 @Log4j2
 public class App {
-    private final static long REFRESH_MINUTES = 15;
+    private static final  long REFRESH_MINUTES = 15;
 
     private final PushManager push;
     private final CoronaResultsFetcher casesFetcher;

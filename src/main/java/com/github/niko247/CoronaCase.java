@@ -14,6 +14,6 @@ public class CoronaCase {
 
     @Override
     public String toString() {
-        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków" + casesNumber;
+        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków:" + casesNumber;
     }
 }

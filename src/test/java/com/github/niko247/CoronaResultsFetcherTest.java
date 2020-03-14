@@ -14,11 +14,11 @@ public class CoronaResultsFetcherTest {
         var fetcher = new CoronaResultsFetcher();
 
         //when
-        final var coronaCases = fetcher.fetchCases();
+        var coronaCases = fetcher.fetchCases();
 
         //then
         assertThat(coronaCases).isNotEmpty();
-        final var firstCase = coronaCases.get(0);
+        var firstCase = coronaCases.get(0);
         assertThat(firstCase.getVoivodeship()).isNotBlank();
         assertThat(firstCase.getCounty()).isNotBlank();
         assertThat(firstCase.getCasesNumber()).isPositive();

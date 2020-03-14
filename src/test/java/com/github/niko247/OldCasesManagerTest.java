@@ -18,7 +18,7 @@ public class OldCasesManagerTest {
         //given
         var oldCasesManager = new OldCasesManager("not_existing");
         //when
-        final var oldCases = oldCasesManager.get();
+        var oldCases = oldCasesManager.get();
         //then
         assertThat(oldCases).isEmpty();
 
@@ -28,7 +28,7 @@ public class OldCasesManagerTest {
     public void testSave() throws IOException {
         //given
         var oldCasesManager = new OldCasesManager(folder.newFile().getPath());
-        final var coronaCase = new CoronaCase();
+        var coronaCase = new CoronaCase();
 
         //when
         oldCasesManager.save(Collections.singletonList(coronaCase));

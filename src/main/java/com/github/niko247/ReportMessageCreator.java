@@ -19,11 +19,12 @@ public class ReportMessageCreator {
             var newCases = CollectionUtils.subtract(cases, casesOld);
             var difference = currentCases - oldCases;
             return Optional.of(
-                    String.format("Całkowita ilość %s (%+d). Lokacje:%s",
+                    String.format("Całkowita ilość %s (%+d). Lokacje:%s %s",
                             currentCases,
                             difference,
                             newCases.stream().map(CoronaCase::getCounty).
-                                    collect(Collectors.joining(", "))));
+                                    collect(Collectors.joining(", ")),
+                            "https://bit.ly/33k664w"));
 
 
         }

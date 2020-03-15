@@ -16,11 +16,14 @@ public class CoronaResultsFetcher {
     private static final String CORONAVIRUS_DATA_ID = "registerData";
     private static final Type LIST_TYPE = new TypeToken<ArrayList<CoronaCase>>() {
     }.getType();
+    private static final String TOTAL_CASES_VOIVODESHIP = "Cała Polska";
 
     public List<CoronaCase> fetchCases() throws IOException {
         var response = requestCoronavirusPage();
         var text = extractRawData(response);
-        return convertToParsed(text);
+        var coronaCases = convertToParsed(text);
+        coronaCases.removeIf(c -> TOTAL_CASES_VOIVODESHIP.equals(c.getVoivodeship()));
+        return coronaCases;
     }
 
     private List<CoronaCase> convertToParsed(String rawDataText) {

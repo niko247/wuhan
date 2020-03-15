@@ -26,7 +26,7 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita ilość 3 (+2). Lokacje:COUNTY2, COUNTY3");
+        assertThat(result.get()).isEqualTo("Całkowita ilość 3 (+2). Lokacje:COUNTY2, COUNTY3 https://bit.ly/33k664w");
 
     }
 

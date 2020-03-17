@@ -21,6 +21,6 @@ public class CoronaCase {
     }
 
     public int getDeathsNumberAsInt() {
-        return deathsNumber.isBlank() ? 0 : Integer.parseInt(deathsNumber);
+        return deathsNumber == null || deathsNumber.isBlank() ? 0 : Integer.parseInt(deathsNumber);
     }
 }

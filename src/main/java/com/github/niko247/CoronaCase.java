@@ -11,9 +11,16 @@ public class CoronaCase {
     private String county;
     @SerializedName("Liczba")
     private int casesNumber;
+    @SerializedName("Liczba zgonów")
+    private String deathsNumber;
 
     @Override
     public String toString() {
-        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków:" + casesNumber;
+        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków:" + casesNumber +
+                " Liczba zgonów:" + deathsNumber;
+    }
+
+    public int getDeathsNumberAsInt() {
+        return deathsNumber.isBlank() ? 0 : Integer.parseInt(deathsNumber);
     }
 }

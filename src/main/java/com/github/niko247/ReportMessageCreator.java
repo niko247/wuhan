@@ -1,37 +1,57 @@
 package com.github.niko247;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.function.ToIntFunction;
 
 @Log4j2
 public class ReportMessageCreator {
+    public static final String STATS_LINK = "https://bit.ly/33k664w";
+    private List<CoronaCase> cases;
+    private List<CoronaCase> casesOld;
 
     public Optional<String> createIfNewCases(List<CoronaCase> cases, List<CoronaCase> casesOld) {
+        this.cases = cases;
+        this.casesOld = casesOld;
+
+        logCurrentCases();
+
+        var totalMessage = createDifferenceReport(this::countCasesNumber, "Całkowita ilość");
+        var deathsMessage = createDifferenceReport(this::countDeathsNumber, "Zmarłych");
+
+        if (totalMessage.isPresent() || deathsMessage.isPresent()) {
+            return Optional.of(totalMessage.orElse("") + deathsMessage.orElse("") + STATS_LINK);
+        }
+        return Optional.empty();
+    }
+
+    private void logCurrentCases() {
         var currentCases = countCasesNumber(cases);
         log.info("Checking if generate report for total cases:" + currentCases);
-        var oldCases = countCasesNumber(casesOld);
-        var newCasesDetected = currentCases != oldCases;
-        if (newCasesDetected) {
-            var newCases = CollectionUtils.subtract(cases, casesOld);
-            var difference = currentCases - oldCases;
-            return Optional.of(
-                    String.format("Całkowita ilość %s (%+d). Lokacje:%s %s",
-                            currentCases,
-                            difference,
-                            newCases.stream().map(CoronaCase::getCounty).
-                                    collect(Collectors.joining(", ")),
-                            "https://bit.ly/33k664w"));
+    }
 
+    private Optional<String> createDifferenceReport(ToIntFunction<List<CoronaCase>> counter, String messagePrefix) {
+        var currentCounterResult = counter.applyAsInt(cases);
+        var oldCounterResult = counter.applyAsInt(casesOld);
 
+        var difference = currentCounterResult - oldCounterResult;
+        if (difference != 0) {
+            return Optional.of(String.format("%s: %s (%+d). ", messagePrefix, currentCounterResult, difference));
         }
         return Optional.empty();
     }
 
     private int countCasesNumber(List<CoronaCase> cases) {
-        return cases.stream().mapToInt(CoronaCase::getCasesNumber).sum();
+        return countSumOf(cases, CoronaCase::getCasesNumber);
+    }
+
+    private int countDeathsNumber(List<CoronaCase> cases) {
+        return countSumOf(cases, CoronaCase::getDeathsNumberAsInt);
+    }
+
+    private int countSumOf(List<CoronaCase> cases, ToIntFunction<CoronaCase> getter) {
+        return cases.stream().mapToInt(getter).sum();
     }
 }

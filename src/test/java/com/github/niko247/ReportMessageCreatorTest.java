@@ -13,9 +13,9 @@ public class ReportMessageCreatorTest {
     public void createNoDeathssTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var coronaCase = createCase("COUNTY1", "4");
-        var coronaCase2 = createCase("COUNTY2", "0");
-        var coronaCase3 = createCase("COUNTY3", "");
+        var coronaCase = createCase("4");
+        var coronaCase2 = createCase("0");
+        var coronaCase3 = createCase("");
 
         var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
         var oldCases = Collections.singletonList(coronaCase);
@@ -25,7 +25,7 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita ilość: 3 (+2). https://bit.ly/33k664w");
+        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2). https://bit.ly/33k664w");
 
     }
 
@@ -33,9 +33,9 @@ public class ReportMessageCreatorTest {
     public void createIfNewCasesTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var coronaCase = createCase("COUNTY1", "2");
-        var coronaCase2 = createCase("COUNTY2", "2");
-        var coronaCase3 = createCase("COUNTY3", "2");
+        var coronaCase = createCase("2");
+        var coronaCase2 = createCase("2");
+        var coronaCase3 = createCase("2");
 
         var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
         var oldCases = Collections.singletonList(coronaCase);
@@ -45,14 +45,13 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita ilość: 3 (+2). Zmarłych: 6 (+4). https://bit.ly/33k664w");
+        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2). Zmarłych: 6 (+4). https://bit.ly/33k664w");
 
     }
 
-    private CoronaCase createCase(String county, String deaths) {
+    private CoronaCase createCase(String deaths) {
         var coronaCase = new CoronaCase();
         coronaCase.setVoivodeship("VOIVODESHIP");
-        coronaCase.setCounty(county);
         coronaCase.setCasesNumber(1);
         coronaCase.setDeathsNumber(deaths);
         return coronaCase;

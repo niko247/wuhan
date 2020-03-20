@@ -18,7 +18,7 @@ public class ReportMessageCreator {
 
         logCurrentCases();
 
-        var totalMessage = createDifferenceReport(this::countCasesNumber, "Całkowita ilość");
+        var totalMessage = createDifferenceReport(this::countCasesNumber, "Całkowita liczba");
         var deathsMessage = createDifferenceReport(this::countDeathsNumber, "Zmarłych");
 
         if (totalMessage.isPresent() || deathsMessage.isPresent()) {

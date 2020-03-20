@@ -7,8 +7,6 @@ import lombok.Data;
 public class CoronaCase {
     @SerializedName("Województwo")
     private String voivodeship;
-    @SerializedName("Powiat/Miasto")
-    private String county;
     @SerializedName("Liczba")
     private int casesNumber;
     @SerializedName("Liczba zgonów")
@@ -16,7 +14,7 @@ public class CoronaCase {
 
     @Override
     public String toString() {
-        return "Województwo: " + voivodeship + " Powiat/Miasto: " + county + " Liczba przypadków:" + casesNumber +
+        return "Województwo: " + voivodeship + " Liczba przypadków:" + casesNumber +
                 " Liczba zgonów:" + deathsNumber;
     }
 

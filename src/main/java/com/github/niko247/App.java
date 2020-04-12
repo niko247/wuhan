@@ -3,25 +3,28 @@ package com.github.niko247;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Log4j2
 public class App {
-    private static final  long REFRESH_MINUTES = 15;
+    private static final long REFRESH_MINUTES = 15;
 
-    private final PushManager push;
+    private final Collection<MessageSender> messageSenders;
     private final CoronaResultsFetcher casesFetcher;
     private final OldCasesManager oldCasesManager;
     private final ReportMessageCreator reportMessageCreator;
 
     public App() {
-        this(new PushManager(), new CoronaResultsFetcher(), new OldCasesManager(), new ReportMessageCreator());
+        this(Collections.singletonList(new TelegramSender()), new CoronaResultsFetcher(),
+                new OldCasesManager(), new ReportMessageCreator());
     }
 
-    public App(PushManager pushManager, CoronaResultsFetcher casesFetcher, OldCasesManager oldCasesManager,
+    public App(Collection<MessageSender> messageSenders, CoronaResultsFetcher casesFetcher, OldCasesManager oldCasesManager,
                ReportMessageCreator reportMessageCreator) {
-        this.push = pushManager;
+        this.messageSenders = messageSenders;
         this.casesFetcher = casesFetcher;
         this.oldCasesManager = oldCasesManager;
         this.reportMessageCreator = reportMessageCreator;
@@ -64,7 +67,7 @@ public class App {
 
 
     private void reportServices(String message) {
-        push.send(message);
+        messageSenders.forEach(ms -> ms.send(message));
     }
 
 

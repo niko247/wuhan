@@ -7,7 +7,7 @@ import org.jsoup.Jsoup;
 import java.io.IOException;
 
 @Log4j2
-public class PushManager {
+public class PushManager implements MessageSender {
     public boolean send(String message) {
         try {
             var appKey = System.getenv("PUSH_APP_KEY");

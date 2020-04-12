@@ -6,6 +6,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class AppTest {
     @Test
     public void fetchPageAndReportTest() throws IOException {
         //given
-        var app = new App(push, casesFetcher, oldCasesManager, reportMessageCreator);
+        var app = new App(Collections.singleton(push), casesFetcher, oldCasesManager, reportMessageCreator);
         when(casesFetcher.fetchCases()).thenReturn(currentCases);
         when(oldCasesManager.get()).thenReturn(Optional.of(oldCases));
         var report = "REPORT";

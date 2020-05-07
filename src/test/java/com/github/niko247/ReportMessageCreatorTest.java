@@ -52,7 +52,7 @@ public class ReportMessageCreatorTest {
     private CoronaCase createCase(String deaths) {
         var coronaCase = new CoronaCase();
         coronaCase.setVoivodeship("VOIVODESHIP");
-        coronaCase.setCasesNumber(1);
+        coronaCase.setCasesNumber("1");
         coronaCase.setDeathsNumber(deaths);
         return coronaCase;
     }

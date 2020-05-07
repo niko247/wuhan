@@ -8,7 +8,7 @@ public class CoronaCase {
     @SerializedName("Województwo")
     private String voivodeship;
     @SerializedName("Liczba")
-    private int casesNumber;
+    private String casesNumber;
     @SerializedName("Liczba zgonów")
     private String deathsNumber;
 
@@ -19,6 +19,18 @@ public class CoronaCase {
     }
 
     public int getDeathsNumberAsInt() {
-        return deathsNumber == null || deathsNumber.isBlank() ? 0 : Integer.parseInt(deathsNumber);
+        return parseIntFromStringDefaultZero(deathsNumber);
+    }
+
+    public int getCasesNumberAsInt() {
+        return parseIntFromStringDefaultZero(casesNumber);
+    }
+
+    private int parseIntFromStringDefaultZero(String value) {
+        return value == null || value.isBlank() ? 0 : Integer.parseInt(removeSpaces(value));
+    }
+
+    private String removeSpaces(String value) {
+        return value.replace(" ", "");
     }
 }

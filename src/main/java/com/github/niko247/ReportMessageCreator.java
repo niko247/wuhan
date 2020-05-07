@@ -44,7 +44,7 @@ public class ReportMessageCreator {
     }
 
     private int countCasesNumber(List<CoronaCase> cases) {
-        return countSumOf(cases, CoronaCase::getCasesNumber);
+        return countSumOf(cases, CoronaCase::getCasesNumberAsInt);
     }
 
     private int countDeathsNumber(List<CoronaCase> cases) {

@@ -21,6 +21,6 @@ public class CoronaResultsFetcherTest {
         var firstCase = coronaCases.get(0);
         assertThat(coronaCases.stream().noneMatch(c -> "Cała Polska".equals(c.getVoivodeship()))).isTrue();
         assertThat(firstCase.getVoivodeship()).isNotBlank();
-        assertThat(firstCase.getCasesNumber()).isPositive();
+        assertThat(firstCase.getCasesNumberAsInt()).isPositive();
     }
 }

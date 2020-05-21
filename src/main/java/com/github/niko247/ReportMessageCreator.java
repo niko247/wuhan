@@ -8,7 +8,6 @@ import java.util.function.ToIntFunction;
 
 @Log4j2
 public class ReportMessageCreator {
-    public static final String STATS_LINK = "https://bit.ly/33k664w";
     private List<CoronaCase> cases;
     private List<CoronaCase> casesOld;
 
@@ -22,7 +21,7 @@ public class ReportMessageCreator {
         var deathsMessage = createDifferenceReport(this::countDeathsNumber, "Zmarłych");
 
         if (totalMessage.isPresent() || deathsMessage.isPresent()) {
-            return Optional.of(totalMessage.orElse("") + deathsMessage.orElse("") + STATS_LINK);
+            return Optional.of(totalMessage.orElse("") + deathsMessage.orElse(""));
         }
         return Optional.empty();
     }

@@ -2,7 +2,7 @@
 Coronavirus check for Poland.
 Checks for new cases of coronavirus infections in Poland and send push notifications.
 
-Requires Java>=13
+Requires Java>=14
 
 In order to send send push notification via pushed.co given environment variables must be set:
 

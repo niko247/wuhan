@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
+import java.util.stream.Stream;
 
 @Log4j2
 public class ReportMessageCreator {
@@ -21,7 +22,8 @@ public class ReportMessageCreator {
         var deathsMessage = createDifferenceReport(this::countDeathsNumber, "Zmarłych");
 
         if (totalMessage.isPresent() || deathsMessage.isPresent()) {
-            return Optional.of(totalMessage.orElse("") + deathsMessage.orElse(""));
+            return Stream.of(totalMessage, deathsMessage).filter(Optional::isPresent).map(Optional::get).
+                    reduce((a, b) -> a + " " + b);
         }
         return Optional.empty();
     }
@@ -37,7 +39,7 @@ public class ReportMessageCreator {
 
         var difference = currentCounterResult - oldCounterResult;
         if (difference != 0) {
-            return Optional.of(String.format("%s: %s (%+d). ", messagePrefix, currentCounterResult, difference));
+            return Optional.of(String.format("%s: %s (%+d).", messagePrefix, currentCounterResult, difference));
         }
         return Optional.empty();
     }

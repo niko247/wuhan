@@ -25,7 +25,7 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2). https://bit.ly/33k664w");
+        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2).");
 
     }
 
@@ -45,7 +45,7 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2). Zmarłych: 6 (+4). https://bit.ly/33k664w");
+        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2). Zmarłych: 6 (+4).");
 
     }
 

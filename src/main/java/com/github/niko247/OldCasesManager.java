@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class OldCasesManager {
-    private final Path tempFilePath;
+    private Path tempFilePath;
     private static final Type LIST_TYPE = new TypeToken<ArrayList<CoronaCase>>() {
     }.getType();
 
@@ -21,7 +21,15 @@ public class OldCasesManager {
     }
 
     public OldCasesManager(String tempFilePath) {
-        this.tempFilePath = Path.of(tempFilePath);
+        setPath(tempFilePath);
+    }
+
+    public void setPath(String path) {
+        this.tempFilePath = Path.of(path);
+    }
+
+    public void setPath(Path path) {
+        this.tempFilePath = path;
     }
 
     public Optional<List<CoronaCase>> get() throws IOException {

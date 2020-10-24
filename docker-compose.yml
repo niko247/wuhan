@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  wuhanpl:
+    container_name: wuhanpl
+    image: wuhanpl:1.2
+    environment:
+      TELEGRAM_TOKEN: 'XXXXXXXXXXX'
+      OUTPUT_FOLDER: '/outputs/'
+    volumes:
+      - './outputs/:/outputs/'
+    restart: unless-stopped

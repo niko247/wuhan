@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Log4j2
 public class App {
@@ -43,18 +45,16 @@ public class App {
     }
 
     public void main() {
-        var loopNr = 1;
-        while (!Thread.currentThread().isInterrupted()) {
+        var loopNr = new AtomicInteger(1);
+        var scheduler = Executors.newSingleThreadScheduledExecutor();
+        scheduler.scheduleAtFixedRate(() -> {
+            log.info("Fetching data in loop:" + loopNr.getAndIncrement());
             try {
-                log.info("Fetching data in loop:" + loopNr++);
                 fetchPageAndReport();
-                Thread.sleep(TimeUnit.MINUTES.toMillis(REFRESH_MINUTES));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 log.error(e);
-            } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
             }
-        }
+        }, 0, REFRESH_MINUTES, TimeUnit.MINUTES);
     }
 
     public void fetchPageAndReport() throws IOException {

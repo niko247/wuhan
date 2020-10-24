@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build -t wuhanpl:1.1 .
+docker build --no-cache -t wuhanpl:1.2 .

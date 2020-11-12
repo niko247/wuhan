@@ -7,6 +7,7 @@ services:
     environment:
       TELEGRAM_TOKEN: 'XXXXXXXXXXX'
       OUTPUT_FOLDER: '/outputs/'
+      TZ: 'Europe/Warsaw'
     volumes:
       - './outputs/:/outputs/'
     restart: unless-stopped

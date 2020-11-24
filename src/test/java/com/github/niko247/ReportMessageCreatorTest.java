@@ -13,15 +13,11 @@ public class ReportMessageCreatorTest {
     public void createNoDeathssTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var coronaCase = createCase("4");
-        var coronaCase2 = createCase("0");
-        var coronaCase3 = createCase("");
-
-        var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
-        var oldCases = Collections.singletonList(coronaCase);
+        var cases = createCase(3, 5);
+        var casesOld = createCase(1, 5);
 
         //when
-        var result = reportCreator.createIfNewCases(currentCases, oldCases);
+        var result = reportCreator.createIfNewCases(cases, casesOld);
 
         //then
         assertThat(result).isNotEmpty();
@@ -33,15 +29,11 @@ public class ReportMessageCreatorTest {
     public void createIfNewCasesTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var coronaCase = createCase("2");
-        var coronaCase2 = createCase("2");
-        var coronaCase3 = createCase("2");
-
-        var currentCases = List.of(coronaCase, coronaCase2, coronaCase3);
-        var oldCases = Collections.singletonList(coronaCase);
+        var cases = createCase(3, 6);
+        var casesOld = createCase(1, 2);
 
         //when
-        var result = reportCreator.createIfNewCases(currentCases, oldCases);
+        var result = reportCreator.createIfNewCases(cases, casesOld);
 
         //then
         assertThat(result).isNotEmpty();
@@ -49,11 +41,10 @@ public class ReportMessageCreatorTest {
 
     }
 
-    private CoronaCase createCase(String deaths) {
-        var coronaCase = new CoronaCase();
-        coronaCase.setVoivodeship("VOIVODESHIP");
-        coronaCase.setCasesNumber("1");
-        coronaCase.setDeathsNumber(deaths);
-        return coronaCase;
+    private SummaryResults createCase(Integer cases, Integer deaths) {
+        var summaryResults = new SummaryResults();
+        summaryResults.setTotalCases(cases);
+        summaryResults.setTotalDeaths(deaths);
+        return summaryResults;
     }
 }

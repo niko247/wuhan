@@ -28,14 +28,18 @@ public class OldCasesManagerTest {
     public void testSave() throws IOException {
         //given
         var oldCasesManager = new OldCasesManager(folder.newFile().getPath());
-        var coronaCase = new CoronaCase();
+        var coronaCase = new SummaryResults();
+        coronaCase.setTotalDeaths(21);
+        coronaCase.setTotalCases(36);
 
         //when
-        oldCasesManager.save(Collections.singletonList(coronaCase));
+        oldCasesManager.save(coronaCase);
         final var oldCases = oldCasesManager.get();
 
         //then
         assertThat(oldCases).isNotEmpty();
-        assertThat(oldCases.get()).hasSize(1);
+        assertThat(oldCases.get().getTotalDeaths()).isEqualTo(21);
+        assertThat(oldCases.get().getTotalCases()).isEqualTo(36);
+
     }
 }

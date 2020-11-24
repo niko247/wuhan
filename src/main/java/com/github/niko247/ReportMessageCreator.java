@@ -9,10 +9,10 @@ import java.util.stream.Stream;
 
 @Log4j2
 public class ReportMessageCreator {
-    private List<CoronaCase> cases;
-    private List<CoronaCase> casesOld;
+    private SummaryResults cases;
+    private SummaryResults casesOld;
 
-    public Optional<String> createIfNewCases(List<CoronaCase> cases, List<CoronaCase> casesOld) {
+    public Optional<String> createIfNewCases(SummaryResults cases, SummaryResults casesOld) {
         this.cases = cases;
         this.casesOld = casesOld;
 
@@ -33,7 +33,7 @@ public class ReportMessageCreator {
         log.info("Checking if generate report for total cases:" + currentCases);
     }
 
-    private Optional<String> createDifferenceReport(ToIntFunction<List<CoronaCase>> counter, String messagePrefix) {
+    private Optional<String> createDifferenceReport(ToIntFunction<SummaryResults> counter, String messagePrefix) {
         var currentCounterResult = counter.applyAsInt(cases);
         var oldCounterResult = counter.applyAsInt(casesOld);
 
@@ -44,15 +44,13 @@ public class ReportMessageCreator {
         return Optional.empty();
     }
 
-    private int countCasesNumber(List<CoronaCase> cases) {
-        return countSumOf(cases, CoronaCase::getCasesNumberAsInt);
+    private int countCasesNumber(SummaryResults cases) {
+        return cases.getTotalCases();
     }
 
-    private int countDeathsNumber(List<CoronaCase> cases) {
-        return countSumOf(cases, CoronaCase::getDeathsNumberAsInt);
+    private int countDeathsNumber(SummaryResults cases) {
+        return cases.getTotalDeaths();
     }
 
-    private int countSumOf(List<CoronaCase> cases, ToIntFunction<CoronaCase> getter) {
-        return cases.stream().mapToInt(getter).sum();
-    }
+
 }

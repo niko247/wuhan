@@ -24,9 +24,9 @@ public class AppTest {
     @Mock
     private ReportMessageCreator reportMessageCreator;
     @Mock
-    private List<CoronaCase> currentCases;
+    private SummaryResults currentCases;
     @Mock
-    private List<CoronaCase> oldCases;
+    private SummaryResults oldCases;
 
     @Test
     public void fetchPageAndReportTest() throws IOException {

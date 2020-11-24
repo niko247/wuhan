@@ -63,7 +63,7 @@ public class App {
 
     }
 
-    private void reportAndSave(List<CoronaCase> cases) throws IOException {
+    private void reportAndSave(SummaryResults cases) throws IOException {
         var casesOld = oldCasesManager.get().orElse(cases);
         reportMessageCreator.createIfNewCases(cases, casesOld).ifPresent(message -> {
                     log.info(message);

@@ -2,6 +2,7 @@ package com.github.niko247;
 
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.ToIntFunction;
 import java.util.stream.Stream;
@@ -38,7 +39,7 @@ public class ReportMessageCreator {
 
         var difference = currentCounterResult - oldCounterResult;
         if (difference != 0) {
-            return Optional.of(String.format("%s: %,d (%+,d).", messagePrefix, currentCounterResult, difference));
+            return Optional.of(String.format(new Locale("pl", "PL"), "%s: %,d (%+,d).", messagePrefix, currentCounterResult, difference));
         }
         return Optional.empty();
     }

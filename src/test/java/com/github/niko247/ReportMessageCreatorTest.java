@@ -2,18 +2,15 @@ package com.github.niko247;
 
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ReportMessageCreatorTest {
     @Test
-    public void createNoDeathssTest() {
+    public void createNoDeathsTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var cases = createCase(3, 5);
+        var cases = createCase(3000, 5);
         var casesOld = createCase(1, 5);
 
         //when
@@ -21,7 +18,7 @@ public class ReportMessageCreatorTest {
 
         //then
         assertThat(result).isNotEmpty();
-        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 (+2).");
+        assertThat(result.get()).isEqualTo("Całkowita liczba: 3 000 (+2 999).");
 
     }
 

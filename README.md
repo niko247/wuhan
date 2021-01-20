@@ -2,12 +2,12 @@
 Coronavirus check for Poland.
 Checks for new cases of coronavirus infections in Poland and send push notifications.
 
-Requires Java>=14
+Requires Java>=15
 
-In order to send send push notification via pushed.co given environment variables must be set:
+In order to send send push notification via Telegram given environment variables must be set:
 
-**PUSH_APP_KEY**
+**TELEGRAM_TOKEN: 'XXXXXXXXXXX'**
 
-**PUSH_APP_SECRET**
+and changed chat_id in code.
 
 Application can be deployed to Heroku using included Procfile

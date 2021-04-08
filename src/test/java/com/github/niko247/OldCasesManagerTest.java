@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,9 +27,7 @@ public class OldCasesManagerTest {
     public void testSave() throws IOException {
         //given
         var oldCasesManager = new OldCasesManager(folder.newFile().getPath());
-        var coronaCase = new SummaryResults();
-        coronaCase.setTotalDeaths(21);
-        coronaCase.setTotalCases(36);
+        var coronaCase = new SummaryResults(36, 21);
 
         //when
         oldCasesManager.save(coronaCase);
@@ -38,8 +35,8 @@ public class OldCasesManagerTest {
 
         //then
         assertThat(oldCases).isNotEmpty();
-        assertThat(oldCases.get().getTotalDeaths()).isEqualTo(21);
-        assertThat(oldCases.get().getTotalCases()).isEqualTo(36);
+        assertThat(oldCases.get().totalDeaths()).isEqualTo(21);
+        assertThat(oldCases.get().totalCases()).isEqualTo(36);
 
     }
 }

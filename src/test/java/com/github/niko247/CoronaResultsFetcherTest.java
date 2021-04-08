@@ -18,7 +18,7 @@ public class CoronaResultsFetcherTest {
 
         //then
         assertThat(coronaCases).isNotNull();
-        assertThat(coronaCases.getTotalCases()).isNotNull();
-        assertThat(coronaCases.getTotalDeaths()).isNotNull();
+        assertThat(coronaCases.totalCases()).isNotNull();
+        assertThat(coronaCases.totalDeaths()).isNotNull();
     }
 }

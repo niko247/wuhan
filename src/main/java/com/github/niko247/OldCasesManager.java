@@ -1,6 +1,6 @@
 package com.github.niko247;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public class OldCasesManager {
     private Path tempFilePath;
+    private ObjectMapper mapper;
 
     public OldCasesManager() {
         this("corona_temp.json");
@@ -16,6 +17,7 @@ public class OldCasesManager {
 
     public OldCasesManager(String tempFilePath) {
         setPath(tempFilePath);
+        mapper = new ObjectMapper();
     }
 
     public void setPath(String path) {
@@ -29,14 +31,14 @@ public class OldCasesManager {
     public Optional<SummaryResults> get() throws IOException {
         if (Files.exists(tempFilePath)) {
             var jsonContent = Files.readString(tempFilePath);
-            return Optional.of(new Gson().fromJson(jsonContent, SummaryResults.class));
+            return Optional.of(mapper.readValue(jsonContent, SummaryResults.class));
         } else {
             return Optional.empty();
         }
     }
 
     public void save(SummaryResults cases) throws IOException {
-        var jsonContent = new Gson().toJson(cases);
+        var jsonContent = mapper.writeValueAsString(cases);
         Files.writeString(tempFilePath, jsonContent);
     }
 

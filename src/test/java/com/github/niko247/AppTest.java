@@ -7,7 +7,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -23,10 +22,10 @@ public class AppTest {
     private OldCasesManager oldCasesManager;
     @Mock
     private ReportMessageCreator reportMessageCreator;
-    @Mock
-    private SummaryResults currentCases;
-    @Mock
-    private SummaryResults oldCases;
+
+    private final SummaryResults currentCases = new SummaryResults(30, 12);
+
+    private final SummaryResults oldCases = new SummaryResults(10, 5);
 
     @Test
     public void fetchPageAndReportTest() throws IOException {

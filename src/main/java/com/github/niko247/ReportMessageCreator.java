@@ -18,8 +18,8 @@ public class ReportMessageCreator {
 
         logCurrentCases();
 
-        var totalMessage = createDifferenceReport(this::countCasesNumber, "Całkowita liczba");
-        var deathsMessage = createDifferenceReport(this::countDeathsNumber, "Zmarłych");
+        var totalMessage = createDifferenceReport(SummaryResults::totalCases, "Całkowita liczba");
+        var deathsMessage = createDifferenceReport(SummaryResults::totalDeaths, "Zmarłych");
 
         if (totalMessage.isPresent() || deathsMessage.isPresent()) {
             return Stream.of(totalMessage, deathsMessage).filter(Optional::isPresent).map(Optional::get).
@@ -29,7 +29,7 @@ public class ReportMessageCreator {
     }
 
     private void logCurrentCases() {
-        var currentCases = countCasesNumber(cases);
+        var currentCases = cases.totalCases();
         log.info("Checking if generate report for total cases:" + currentCases);
     }
 
@@ -42,14 +42,6 @@ public class ReportMessageCreator {
             return Optional.of(String.format(new Locale("pl", "PL"), "%s: %,d (%+,d).", messagePrefix, currentCounterResult, difference));
         }
         return Optional.empty();
-    }
-
-    private int countCasesNumber(SummaryResults cases) {
-        return cases.getTotalCases();
-    }
-
-    private int countDeathsNumber(SummaryResults cases) {
-        return cases.getTotalDeaths();
     }
 
 

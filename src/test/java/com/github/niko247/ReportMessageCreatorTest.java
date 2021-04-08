@@ -10,8 +10,8 @@ public class ReportMessageCreatorTest {
     public void createNoDeathsTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var cases = createCase(3000, 5);
-        var casesOld = createCase(1, 5);
+        var cases = new SummaryResults(3000, 5);
+        var casesOld = new SummaryResults(1, 5);
 
         //when
         var result = reportCreator.createIfNewCases(cases, casesOld);
@@ -26,8 +26,8 @@ public class ReportMessageCreatorTest {
     public void createIfNewCasesTest() {
         //given
         var reportCreator = new ReportMessageCreator();
-        var cases = createCase(3, 6);
-        var casesOld = createCase(1, 2);
+        var cases = new SummaryResults(3, 6);
+        var casesOld = new SummaryResults(1, 2);
 
         //when
         var result = reportCreator.createIfNewCases(cases, casesOld);
@@ -38,10 +38,4 @@ public class ReportMessageCreatorTest {
 
     }
 
-    private SummaryResults createCase(Integer cases, Integer deaths) {
-        var summaryResults = new SummaryResults();
-        summaryResults.setTotalCases(cases);
-        summaryResults.setTotalDeaths(deaths);
-        return summaryResults;
-    }
 }

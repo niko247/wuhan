@@ -5,9 +5,10 @@ services:
     container_name: wuhanpl
     image: wuhanpl:1.4
     environment:
-      TELEGRAM_TOKEN: 'XXXXXXXXXXX'
       OUTPUT_FOLDER: '/outputs/'
       TZ: 'Europe/Warsaw'
+    env_file:
+      - .env
     volumes:
       - './outputs/:/outputs/'
     restart: unless-stopped

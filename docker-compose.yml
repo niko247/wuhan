@@ -3,7 +3,7 @@ version: "3"
 services:
   wuhanpl:
     container_name: wuhanpl
-    image: wuhanpl:1.4
+    image: wuhanpl:1.5
     environment:
       OUTPUT_FOLDER: '/outputs/'
       TZ: 'Europe/Warsaw'

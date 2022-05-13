@@ -2,7 +2,7 @@
 Coronavirus check for Poland.
 Checks for new cases of coronavirus infections in Poland and send push notifications.
 
-Requires Java>=17
+Requires Java>=18
 
 In order to send send push notification via Telegram given environment variables must be set:
 

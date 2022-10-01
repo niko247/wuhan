@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class OldCasesManager {
     private Path tempFilePath;
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
 
     public OldCasesManager() {
         this("corona_temp.json");

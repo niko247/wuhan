@@ -1,9 +1,9 @@
-FROM maven:3.8.6-amazoncorretto-19 AS builder
+FROM maven:3.9-amazoncorretto-20 AS builder
 COPY . /app
 WORKDIR /app
 RUN mvn verify
 
-FROM openjdk:19
+FROM openjdk:20
 COPY --from=builder /app/target /target
 RUN chmod +x /target/bin/worker
 CMD ["sh", "/target/bin/worker"]
